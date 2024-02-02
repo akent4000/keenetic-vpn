@@ -34,7 +34,7 @@ logger_failure() {
   exit 1
 }
 
-DNSCONFIG="/opt/etc/unblock-srv/dnsconfig"
+DNSCONFIG="/opt/etc/unblock-srv/dns-list.txt"
 
 while read -r line || [ -n "$line" ]; do
   [ -z "$line" ] && continue
