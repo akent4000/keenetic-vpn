@@ -11,12 +11,12 @@ error_msg() {
 delete_file() {
   if [ -f "$1" ]; then
     if rm "$1" 2>/dev/null; then
-      msg "${2:-"Файл"} \"${1##*/}\" удален."
+      msg "${2:-"File"} \"${1##*/}\" deleted."
     else
-      error_msg "Не удалось удалить ${3:-"файл"} \"${1##*/}\"."
+      error_msg "Failed to delete ${3:-"file"} \"${1##*/}\"."
     fi
   else
-    msg "${2:-"Файл"} \"${1##*/}\" отсутствует."
+    msg "${2:-"File"} \"${1##*/}\" not found."
   fi
 }
 
@@ -24,28 +24,28 @@ PRJ_DIR="/opt/etc/unblock"
 
 for _tool in ip rm; do
   command -v "$_tool" >/dev/null 2>&1 || {
-    error_msg "Для работы скрипта требуется \"${_tool}\"."
+    error_msg "The script requires \"${_tool}\" to be installed."
     exit 1
   }
 done
 
 # https://stackoverflow.com/a/226724
-read -p "Приступить к удалению? [y/n] " yn
+read -p "Proceed with deletion? [y/n] " yn
 case "$yn" in
   [Yy]*) ;;
-      *) msg "Удаление отменено."; exit 1;;
+      *) msg "Deletion canceled."; exit 1;;
 esac
 
 if ip route flush table 1000; then
-  msg "Таблица маршрутизации #1000 очищена."
+  msg "Routing table #1000 cleared."
 fi
 
 if ip rule del priority 1995 2>/dev/null; then
-  msg "Правило маршрутизации удалено."
+  msg "Routing rule deleted."
 fi
 
-delete_file "/opt/etc/cron.daily/routing_table_update" "Симлинк" "симлинк"
-delete_file "/opt/etc/ndm/ifstatechanged.d/ip_rule_switch" "Симлинк" "симлинк"
+delete_file "/opt/etc/cron.daily/routing_table_update" "Symlink" "symlink"
+delete_file "/opt/etc/ndm/ifstatechanged.d/ip_rule_switch" "Symlink" "symlink"
 
 for _file in \
   config parser.sh start-stop.sh uninstall.sh unblock-list.txt; do
@@ -56,12 +56,12 @@ done
 if [ -d "${PRJ_DIR}" ] && \
    [ "$(echo "${PRJ_DIR}/"*)" = "${PRJ_DIR}/*" ]; then
   if rm -r "${PRJ_DIR}" 2>/dev/null; then
-    msg "Каталог \"${PRJ_DIR}\" удален."
+    msg "Directory \"${PRJ_DIR}\" deleted."
   else
-    error_msg "Не удалось удалить каталог \"${PRJ_DIR}\"."
+    error_msg "Failed to delete directory \"${PRJ_DIR}\"."
   fi
 fi
 
-printf "%s\n" "---" "Удаление завершено."
+printf "%s\n" "---" "Deletion completed."
 
 exit 0

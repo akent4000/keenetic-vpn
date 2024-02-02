@@ -1,5 +1,5 @@
-# Название интерфейса VPN-туннеля из ifconfig или ip address show
+# VPN tunnel interface name from ifconfig or ip address show
 IFACE="foobar"
 
-# Расположение файла с адресами и доменами
-FILE="/opt/etc/unblock/unblock-list.txt"
+# Location of the file with addresses and domains
+FILE="/opt/etc/unblock-srv/unblock.txt"

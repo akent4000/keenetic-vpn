@@ -1,0 +1,8 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/keenetic-vpn/FileContentIndex/11c36bd6-9248-4aa9-989d-6ef6927a2741.vsidx
+/.vs/keenetic-vpn/FileContentIndex
+/.vs/ProjectSettings.json
+*.sqlite
