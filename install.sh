@@ -53,7 +53,7 @@ crt_symlink() {
   fi
 }
 
-msg "Installing keenetic-traffic-via-vpn..."
+msg "Installing keenetic-traffic..."
 
 INSTALL_DIR="/opt/etc/unblock-srv"
 REPO_URL="https://raw.githubusercontent.com/akent4000/keenetic-vpn/main"
@@ -86,7 +86,7 @@ fi
 
 [ ! -f "${INSTALL_DIR}/config" ] && download "${REPO_URL}/config" "${INSTALL_DIR}/config"
 
-for _file in parser.sh start-stop.sh uninstall.sh; do
+for _file in parser.sh start-stop.sh uninstall.sh parse-dns.sh; do
   download "${REPO_URL}/${_file}" "${INSTALL_DIR}/${_file}"
   mk_file_exec "${INSTALL_DIR}/${_file}"
 done

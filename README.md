@@ -13,11 +13,11 @@ opkg install curl
 curl -sfL https://raw.githubusercontent.com/rustrict/keenetic-traffic-via-vpn/main/install.sh | sh
 ```
 
-Установщик создаст каталог `/opt/etc/unblock` (если такой не существует) и поместит в него необходимые файлы. Также будут созданы два симлинка для отслеживания состояния VPN-туннеля и автоматического обновления маршрутов раз в сутки. Для работы скрипта `parser.sh` требуются `bind-dig`, `cron` и `grep` — они будут установлены при отсутствии.
+Установщик создаст каталог `/opt/etc/unblock-srv` (если такой не существует) и поместит в него необходимые файлы. Также будут созданы два симлинка для отслеживания состояния VPN-туннеля и автоматического обновления маршрутов раз в сутки. Для работы скрипта `parser.sh` требуются `bind-dig`, `cron` и `grep` — они будут установлены при отсутствии.
 
 После окончания установки понадобится:
-- Отредактировать файл `/opt/etc/unblock/config`, указав в переменной `IFACE` название интерфейса VPN, которое можно увидеть в выводе команды `ip address show` или `ifconfig`. Например, `ovpn_br0` (=`OpenVPN0`) или `nwg0` (=`Wireguard0`);
-- Заполнить файл `/opt/etc/unblock/unblock-list.txt` доменами и (или) IPv4-адресами (как с префиксом, так и без) ресурсов, трафик до которых вы хотите пустить через VPN;
+- Отредактировать файл `/opt/etc/unblock-srv/config`, указав в переменной `IFACE` название интерфейса VPN, которое можно увидеть в выводе команды `ip address show` или `ifconfig`. Например, `ovpn_br0` (=`OpenVPN0`) или `nwg0` (=`Wireguard0`);
+- Заполнить файл `/opt/etc/unblock-srv/unblock-list.txt` доменами и (или) IPv4-адресами (как с префиксом, так и без) ресурсов, трафик до которых вы хотите пустить через VPN;
 - Запустить VPN-соединение (или перезапустить, если оно было запущено до установки).
 
 ### Примеры заполнения config
@@ -28,7 +28,7 @@ curl -sfL https://raw.githubusercontent.com/rustrict/keenetic-traffic-via-vpn/ma
 IFACE="ovpn_br0"
 
 # Расположение файла с адресами и доменами
-FILE="/opt/etc/unblock/unblock-list.txt"
+FILE="/opt/etc/unblock-srv/unblock-list.txt"
 ```
 
 Для WireGuard-туннеля:
@@ -38,7 +38,7 @@ FILE="/opt/etc/unblock/unblock-list.txt"
 IFACE="nwg0"
 
 # Расположение файла с адресами и доменами
-FILE="/opt/etc/unblock/unblock-list.txt"
+FILE="/opt/etc/unblock-srv/unblock-list.txt"
 ```
 
 ### Пример заполнения unblock-list.txt
@@ -54,7 +54,7 @@ example.com
 ```shell
 ip rule del priority 1995 2>/dev/null
 ip rule add table 1000 priority 1995
-sed -i 's/iif br0 //' /opt/etc/unblock/start-stop.sh
+sed -i 's/iif br0 //' /opt/etc/unblock-srv/start-stop.sh
 ```
 
 После этого под перенаправление попадут все устройства, включая сам роутер.
@@ -63,7 +63,7 @@ sed -i 's/iif br0 //' /opt/etc/unblock/start-stop.sh
 Для удаления выполните команду:
 
 ```shell
-/opt/etc/unblock/uninstall.sh
+/opt/etc/unblock-srv/uninstall.sh
 ```
 
-Будут удалены **все** скаченные и созданные установщиком файлы, а также каталог `/opt/etc/unblock`, если в нём не окажется ничего постороннего.
+Будут удалены **все** скаченные и созданные установщиком файлы, а также каталог `/opt/etc/unblock-srv`, если в нём не окажется ничего постороннего.

@@ -20,7 +20,7 @@ delete_file() {
   fi
 }
 
-PRJ_DIR="/opt/etc/unblock"
+PRJ_DIR="/opt/etc/unblock-srv"
 
 for _tool in ip rm; do
   command -v "$_tool" >/dev/null 2>&1 || {
@@ -48,7 +48,7 @@ delete_file "/opt/etc/cron.daily/routing_table_update" "Symlink" "symlink"
 delete_file "/opt/etc/ndm/ifstatechanged.d/ip_rule_switch" "Symlink" "symlink"
 
 for _file in \
-  config parser.sh start-stop.sh uninstall.sh unblock-list.txt; do
+  config parser.sh start-stop.sh uninstall.sh unblock-list.txt parser-dns.sh dns_list.txt; do
   delete_file "${PRJ_DIR}/${_file}"
 done
 

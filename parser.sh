@@ -32,7 +32,7 @@ combine_temp_files() {
   cat "$@" > "$TEMP_FILE"
 }
 
-CONFIG="/opt/etc/unblock/config"
+CONFIG="/opt/etc/unblock-srv/config"
 if [ -f "$CONFIG" ]; then
   . "$CONFIG"
 else
@@ -75,13 +75,13 @@ fi
 
 logger_msg "Parsing $(grep -c "" "$FILE") line(s) in the file \"${FILE}\"..."
 
-DNSCONFIG="/opt/etc/unblock/dnsconfig"
+DNSCONFIG="/opt/etc/unblock-srv/dnsconfig"
 NUM_DNS=$(wc -l < "$DNSCONFIG")
 
 # Run parsing process for each DNS server in a separate script
 while read -r dns_ip || [ -n "$dns_ip" ]; do
   TEMP_FILE_DNS="${TEMP_FILE_PREFIX}$(date +'%Y%m%d%H%M%S')_${dns_ip}"
-  sh "/opt/etc/unblock/parse_dns.sh" "$FILE" "$TEMP_FILE_DNS" "$dns_ip" "$TEMP_FILE_DNS" "$NUM_DNS" &
+  sh "/opt/etc/unblock-srv/parse_dns.sh" "$FILE" "$TEMP_FILE_DNS" "$dns_ip" "$TEMP_FILE_DNS" "$NUM_DNS" &
 done < "$DNSCONFIG"
 
 # Wait for all child processes to complete

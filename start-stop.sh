@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CONFIG="/opt/etc/unblock/config"
+CONFIG="/opt/etc/unblock-srv/config"
 [ -f "$CONFIG" ] || exit 0
 . "$CONFIG"
 
@@ -23,7 +23,7 @@ kill_parser() {
 case ${connected}-${link}-${up} in
   yes-up-up)
     ip rule add iif br0 table 1000 priority 1995 2>/dev/null
-    /opt/etc/unblock/parser.sh &
+    /opt/etc/unblock-srv/parser.sh &
   ;;
   no-down-*)
     kill_parser

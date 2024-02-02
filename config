@@ -2,4 +2,4 @@
 IFACE="foobar"
 
 # Location of the file with addresses and domains
-FILE="/opt/etc/unblock-srv/unblock.txt"
+FILE="/opt/etc/unblock-srv/unblock-list.txt"
