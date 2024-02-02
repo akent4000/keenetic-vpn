@@ -102,8 +102,8 @@ if [ ! -f "${INSTALL_DIR}/unblock-list.txt" ]; then
   fi
 fi
 
-local DNS_LIST_FILE="${INSTALL_DIR}/dns-list.txt"
-local DNS_LIST_CONTENT="8.8.8.8
+DNS_LIST_FILE="${INSTALL_DIR}/dns-list.txt"
+DNS_LIST_CONTENT="8.8.8.8
 8.8.4.4
 1.1.1.1
 1.0.0.1
