@@ -10,7 +10,7 @@ opkg install curl
 Для начала процесса установки выполните команду:
 
 ```shell
-curl -sfL https://raw.githubusercontent.com/rustrict/keenetic-traffic-via-vpn/main/install.sh | sh
+curl -sfL https://raw.githubusercontent.com/akent4000/keenetic-vpn/main/install.sh | sh
 ```
 
 Установщик создаст каталог `/opt/etc/unblock-srv` (если такой не существует) и поместит в него необходимые файлы. Также будут созданы два симлинка для отслеживания состояния VPN-туннеля и автоматического обновления маршрутов раз в сутки. Для работы скрипта `parser.sh` требуются `bind-dig`, `cron` и `grep` — они будут установлены при отсутствии.
