@@ -32,6 +32,7 @@ combine_temp_files() {
   cat "$@" > "$TEMP_FILE"
 }
 
+start=$(date +%s)
 CONFIG="/opt/etc/unblock-srv/config"
 if [ -f "$CONFIG" ]; then
   . "$CONFIG"
@@ -105,6 +106,8 @@ done < "$TEMP_FILE"
 rm -f "$TEMP_FILE" "${TEMP_FILE_PREFIX}"*
 
 logger_msg "Parsing complete. #1000: $(ip route list table 1000 | wc -l)."
-
+end=$(date +%s)
+runtime=$((end-start))
+echo > /opt/etc/unblock-srv/time_of_last_time_update.txt
 exit 0
 
