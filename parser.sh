@@ -76,7 +76,7 @@ fi
 
 logger_msg "Parsing $(grep -c "" "$FILE") line(s) in the file \"${FILE}\"..."
 
-DNSCONFIG="/opt/etc/unblock-srv/dnsconfig"
+DNSCONFIG="/opt/etc/unblock-srv/dns-list.txt"
 NUM_DNS=$(wc -l < "$DNSCONFIG")
 
 # Run parsing process for each DNS server in a separate script
